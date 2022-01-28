@@ -28,3 +28,7 @@ panel serve 'src\panel_vegafusion\__init__.py' --autoreload --show
 ```bash
 pytest tests
 ```
+
+## Issues Identified
+
+- https://github.com/holoviz/panel/issues/3149

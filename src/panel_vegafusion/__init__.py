@@ -18,6 +18,7 @@ vf.enable()
 class VegaFusion(ReactiveHTML):
     """A Panel pane for Altair charts and Vega dictionaries rendered by VegaFusion"""
 
+    # For now we cannot make this a param Parameter. See https://github.com/holoviz/panel/issues/3149
     # object = param.ClassSelector(class_=(alt.TopLevelMixin, dict), allow_None=True, doc="""
     #     An altair chart or vega-lite dictionary""")
 

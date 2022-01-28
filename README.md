@@ -19,7 +19,9 @@ LEGAL RISK!
 
 ```bash
 git clone https://github.com/MarcSkovMadsen/panel-vegafusion.git
-pip install -e[all]
+conda create -n panel_vegafusion -c conda-forge python=3.9 nodejs
+conda activate panel_vegafusion
+pip install -e .[all]
 ```
 
 ## Develop
@@ -41,6 +43,12 @@ jupyter lab tests/reference_example.ipynb
 ```
 
 This might be useful for understanding how VegaFusion works.
+
+## Build
+
+```bash
+panel build src/panel_vegafusion
+```
 
 ## Test
 

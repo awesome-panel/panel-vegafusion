@@ -1,6 +1,6 @@
 # panel-vegafusion
 
-WORK IN PROGRESS
+WORK IN PROGRESS. NOT WORKING
 
 Provides a VegaFusion component (pane) for Panel to enable interactive big data apps using Vega or Altair
 

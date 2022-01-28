@@ -48,6 +48,11 @@ This might be useful for understanding how VegaFusion works.
 pytest tests
 ```
 
+## References
+
+- [VegaFusion](https://github.com/vegafusion/vegafusion)
+- [Feature Request for Panel Support](https://github.com/vegafusion/vegafusion/issues/62)
+
 ## Issues Identified
 
 - https://github.com/holoviz/panel/issues/3149

@@ -14,6 +14,8 @@ import vegafusion_jupyter as vf
 
 vf.enable()
 
+# Jupyter Python Widget: https://github.com/vegafusion/vegafusion/blob/main/python/vegafusion-jupyter/vegafusion_jupyter/widget.py
+# IPywidget Client Widget: https://github.com/vegafusion/vegafusion/blob/main/python/vegafusion-jupyter/src/widget.ts
 
 class VegaFusion(ReactiveHTML):
     """A Panel pane for Altair charts and Vega dictionaries rendered by VegaFusion"""
@@ -41,7 +43,12 @@ class VegaFusion(ReactiveHTML):
     download_source_link = param.String(None, allow_None=True)
 
     _template = """
-<div id="view" style="height:100%;width:100%">Hello</div>    
+<script type="module">
+    import render_vegafusion from 'https://unpkg.com/vegafusion-wasm@0.0.2?module'
+    document.getElementsByClassName("view")[0].style.background="red"
+    
+</script>
+<div id="view" class="view" style="height:100%;width:100%">Hello</div>    
 """
 
     _request = param.String()

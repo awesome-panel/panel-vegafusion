@@ -2,7 +2,18 @@
 
 WORK IN PROGRESS. NOT WORKING
 
-Provides a VegaFusion component (pane) for Panel to enable interactive big data apps using Vega or Altair
+Provides a [VegaFusion](https://github.com/vegafusion/vegafusion) component (pane) for Panel to enable interactive big data apps using Vega or Altair.
+
+## License - IMPORTANT
+
+This reposity is MIT licensed. BUT the original VegaFusion is AGPLv3 licensed and *requires the
+author to provide this application's source code upon request*.
+
+I honestly believe there is no issue in creating a repository like this and exploring. But I
+don't yet understand the implications for using in a "real" product.
+
+SO PLEASE INVESTIGATE THE LEGAL ASPECTS ON YOUR OWN. YOU WILL BE USING THIS REPO AT YOUR OWN
+LEGAL RISK!
 
 ## Install
 
@@ -22,6 +33,14 @@ For now you can serve a test example with hot reload via
 ```bash
 panel serve 'src\panel_vegafusion\__init__.py' --autoreload --show
 ```
+
+You can compare to the original Jupyter VegaFusion reference example via
+
+```bash
+jupyter lab tests/reference_example.ipynb
+```
+
+This might be useful for understanding how VegaFusion works.
 
 ## Test
 

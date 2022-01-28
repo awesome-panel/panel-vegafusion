@@ -32,3 +32,4 @@ pytest tests
 ## Issues Identified
 
 - https://github.com/holoviz/panel/issues/3149
+- https://github.com/holoviz/param/issues/597

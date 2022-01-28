@@ -2,7 +2,7 @@ from contextlib import contextmanager
 
 import param
 
-
+# Needed because of https://github.com/holoviz/param/issues/597
 @contextmanager
 def edit_constant(parameterized: param.Parameterized):
     """

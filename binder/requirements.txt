@@ -1,4 +1,3 @@
--e ../.[all]
 jupyter-panel-proxy # Adds Panel icon to Jupyter lab launchpad, to launch Panel app(s)
 jupyter-vscode-proxy # Needed for VS Code in Jupyter Lab
 jupyter_bokeh # needed for VS Code

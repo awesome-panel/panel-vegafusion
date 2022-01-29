@@ -1,3 +1,4 @@
+pip install -e .[all]
 jupyter serverextension enable panel.io.jupyter_server_extension # Jupyter Panel Preview https://blog.holoviz.org/panel_0.12.0.html#JupyterLab-previews
 conda install -c conda-forge code-server nodejs # The Code Server https://github.com/coder/code-server
 code-server --install-extension ms-python.python # Python extension for VS Code

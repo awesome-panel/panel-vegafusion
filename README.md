@@ -26,23 +26,25 @@ pip install -e .[all]
 
 ## Develop
 
-The Panel `VegaFusion` pane is in the `src\panel_vegafusion\__init__.py`.
-
-Its being developed using Panels [ReactiveHTML](https://panel.holoviz.org/user_guide/Custom_Components.html#reactivehtml-components).
-
-For now you can serve a test example with hot reload via
+For now you can serve an example with hot reload via
 
 ```bash
-panel serve 'src\panel_vegafusion\__init__.py' --autoreload --show
+panel serve 'examples/basic.py' --autoreload --show
 ```
 
-You can compare to the original Jupyter VegaFusion reference example via
+If working on the `.ts` code you might want to add autorebuild via
+
+```bash
+watchmedo shell-command --patterns="*.ts" --recursive --command='echo "${watch_src_path}" & panel build src/panel_vegafusion & echo "Update" >> src/panel_vegafusion/update.py' src/panel_vegafusion/models
+```
+
+You will have to do a [hard refresh](https://fabricdigital.co.nz/blog/how-to-hard-refresh-your-browser-and-clear-cache) of your browser to load the newly build `.js` files.
+
+You can find inspiration in the original Jupyter VegaFusion reference example via
 
 ```bash
 jupyter lab tests/reference_example.ipynb
 ```
-
-This might be useful for understanding how VegaFusion works.
 
 ## Build
 

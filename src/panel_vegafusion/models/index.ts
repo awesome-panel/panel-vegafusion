@@ -1,1 +1,1 @@
-export {HTMLButton} from "./html_button_model"
+export {VegaFusion} from "./vegafusion_model"

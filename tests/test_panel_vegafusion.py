@@ -16,6 +16,10 @@ def chart():
         y='b'
     )
 
+@pytest.fixture(scope="session", autouse=True)
+def enable_vegafusion():
+    VegaFusion.enable()
+
 @pytest.fixture
 def spec(chart):
     return chart.to_dict()

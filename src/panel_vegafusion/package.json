@@ -6,7 +6,7 @@
   "keywords": [],
   "repository": {},
   "dependencies": {
-    "@bokeh/bokehjs": "^2.4.2"
-  },
-  "devDependencies": {}
+    "@bokeh/bokehjs": "^2.4.2",
+    "vegafusion-wasm": "^0.0.2"
+  }
 }

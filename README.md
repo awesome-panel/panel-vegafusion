@@ -34,7 +34,7 @@ pn.extension(template="fast")
 theme=get_theme()
 alt.themes.enable(theme)
 
-plot=get_plot() # Can be replaced any Altair plot or Vega Specification
+plot=get_plot() # Can be replaced by any Altair plot or Vega Specification
 
 component = VegaFusion(plot, height=800).servable()
 

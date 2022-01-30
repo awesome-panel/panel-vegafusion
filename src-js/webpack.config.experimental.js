@@ -27,7 +27,7 @@ module.exports = {
         extensions: ['.ts', '.js'],
     },
     output: {
-        publicPath: 'dist/',
+        publicPath: 'static/extensions/panel/bundled/panel-vegafusion/',
     }
 }
 

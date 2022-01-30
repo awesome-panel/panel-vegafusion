@@ -4,7 +4,7 @@ import panel as pn
 from panel_vegafusion import VegaFusion
 from panel_vegafusion.utils import ALTAIR_BLUE, get_plot, get_theme
 
-pn.extension(template="fast")
+pn.extension("tabulator", "ace", template="fast")
 
 theme = get_theme()
 alt.themes.enable(theme)

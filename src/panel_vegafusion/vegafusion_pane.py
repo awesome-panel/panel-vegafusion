@@ -15,12 +15,14 @@ import param
 from panel.reactive import ReactiveHTML
 from vegafusion_jupyter.runtime import runtime
 
-from .utils import edit_constant
+from .utils import BUNDLE_PANEL_URL_PREFIX, bundle, edit_constant
 
 logger = logging.getLogger("panel-vegafusion")
 
 VEGA_FUSION_CSS_PATH = pathlib.Path(__file__).parent / "vegafusion_pane.css"
 VEGA_FUSION_CSS = VEGA_FUSION_CSS_PATH.read_text()
+
+bundle()
 
 # pylint: disable=line-too-long
 # Jupyter Python Widget: https://github.com/vegafusion/vegafusion/blob/main/python/vegafusion-jupyter/vegafusion_jupyter/widget.py
@@ -115,7 +117,7 @@ class VegaFusion(ReactiveHTML):
     )
     # pylint: enable=line-too-long
 
-    __javascript_modules__ = ["dist/main.js"]
+    __javascript_modules__ = [BUNDLE_PANEL_URL_PREFIX + "main.js"]
 
     _scripts = {
         "render": """

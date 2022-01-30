@@ -4,12 +4,14 @@
 
 WORK IN PROGRESS. PROOF OF CONCEPT WORKING. PACKAGE NOT WORKING!
 
-The [Panel VegaFusion pane](https://github.com/marcskovmadsen/panel-vegafusion) allows you to
-create interactive big data apps based on the [Altair](https://altair-viz.github.io/index.html)
+The [Panel VegaFusion pane](https://github.com/marcskovmadsen/panel-vegafusion) allows you to create interactive **big data apps** based on the
+[Altair](https://altair-viz.github.io/index.html)
 plotting library and the [Vega](https://vega.github.io/vega/) visualization specification.
 
-It is all powered by [VegaFusion](https://github.com/vegafusion/vegafusion) which provides
-serverside acceleration for the Vega visualization grammar.
+[VegaFusion](https://github.com/vegafusion/vegafusion) provides serverside acceleration for the
+Vega visualization grammar.
+
+[Panel](https://panel.holoviz.org/) makes it easy to create powerful  data apps using the tools you know and ❤️. Member of the [HoloViz](https://holoviz.org/) ecosystem.
 
 ![Reference Example](https://raw.githubusercontent.com/MarcSkovMadsen/panel-vegafusion/main/assets/panel-vegafusion.gif)
 
@@ -19,7 +21,7 @@ serverside acceleration for the Vega visualization grammar.
 pip install panel-vegafusion
 ```
 
-## Reference Example
+## Example
 
 ```python
 import altair as alt
@@ -46,7 +48,7 @@ pn.state.template.param.update(
 
 This needs to be done before alpha release
 
-- [] Fix all errors in `invoke test.all`
+- [x] Fix all errors in `invoke test.all`
 - [] Make python package installable (and release it)
 - [] Implement way to get rid of the user having to serve the assets manually via
 `--static dist=./src-js/dist`.
@@ -57,19 +59,15 @@ This needs to be done before alpha release
 This Panel Vegafusion project is AGPLv3 Licensed because VegaFusion is AGPLv3 licensed and *requires the
 author to provide this application's source code upon request*.
 
-SO PLEASE INVESTIGATE THE LEGAL ASPECTS ON YOUR OWN. YOU WILL BE USING THIS PROJECT AT YOUR OWN RISK ANYWAYS!
+SO PLEASE INVESTIGATE THE LEGAL ASPECTS ON YOUR OWN. YOU WILL BE USING THIS PROJECT AT YOUR OWN RISK ANYWAYS! 👍
 
 [![Legal Statement](https://raw.githubusercontent.com/MarcSkovMadsen/panel-vegafusion/main/assets/legal-statement.png)]((https://github.com/vegafusion/vegafusion/issues/62#issuecomment-1024403557))
 
 ## References
 
-- [VegaFusion](https://github.com/vegafusion/vegafusion)
-- [VegaFusion documentation](https://vegafusion.io/)
-- [Panel](https://panel.holoviz.org/)
-- [Panel Discourse](https://discourse.holoviz.org/)
-- [Awesome Panel](https://awesome-panel.org/)
-- [DataShader](https://datashader.org/) (A mature alternative for big data visualization)
-- [hvplot](https://hvplot.holoviz.org/)/ [HoloViews](https://holoviews.org/) (Provides alternative, easy to use crossfiltering using familar Pandas `.plot` api)
+- [VegaFusion Github](https://github.com/vegafusion/vegafusion) | [VegaFusion documentation](https://vegafusion.io/)
+- [Panel Docs](https://panel.holoviz.org/) | [Panel Discourse](https://discourse.holoviz.org/) | [Awesome Panel](https://awesome-panel.org/)
+- [DataShader](https://datashader.org/) | [hvplot](https://hvplot.holoviz.org/) | [HoloViews](https://holoviews.org/)
 
 ## Issues Identified
 
@@ -129,6 +127,14 @@ panel serve 'tests/apps/test_dev_app.py' --autoreload --show --static dist=./src
 
 ![Panel VegaFusion Test App](https://raw.githubusercontent.com/MarcSkovMadsen/panel-vegafusion/main/assets/panel-vegafusion-dev-test.gif)
 
+### Serve Example Apps
+
+For now you can serve an example with hot reload via
+
+```bash
+panel serve 'examples/*.py' --autoreload --show --static dist=./src-js/dist
+```
+
 ### Reference
 
 You can also find inspiration in the original Jupyter VegaFusion reference example via
@@ -151,4 +157,4 @@ python -m twine upload dist/*<VERSION>*
 
 to deploy the package 📦.
 
-If you want to upload to *Test Pypi* first you can do so by adding `--repository testpypi`.
+If you want to upload to `testpypi` first you can do so by adding `--repository testpypi`.

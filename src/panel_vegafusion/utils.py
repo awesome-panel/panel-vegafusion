@@ -1,9 +1,11 @@
 """Utilities for working with Panel, VegaFusion and Altair"""
+import shutil
 from contextlib import contextmanager
 from typing import Optional, Union
 
 import panel as pn
 import param
+from importlib_metadata import pathlib
 
 ALTAIR_BLUE = "#1f77b4"
 ALTAIR_PALETTE = [
@@ -46,6 +48,26 @@ def edit_constant(parameterized: param.Parameterized):
 def get_theme():
     """Returns the relevant theme ('default' or 'dark') based on url parameters"""
     return pn.state.session_args.get("theme", [b"default"])[0].decode()
+
+
+BUNDLE_SOURCE_PATH = pathlib.Path(__file__).parent / "assets" / "bundled" / "panel-vegafusion"
+print(BUNDLE_SOURCE_PATH)
+BUNDLE_TARGET_PATH = pathlib.Path(pn.__file__).parent / "dist" / "bundled" / "panel-vegafusion"
+print(BUNDLE_TARGET_PATH)
+BUNDLE_PANEL_URL_PREFIX = "static/extensions/panel/bundled/panel-vegafusion/"
+print(BUNDLE_PANEL_URL_PREFIX)
+
+
+def bundle(
+    source: pathlib.Path = BUNDLE_SOURCE_PATH,
+    target: pathlib.Path = BUNDLE_TARGET_PATH,
+):
+    """Copies the panel-vegafusion bundled assets to the Panel bundled assets folder
+    
+    Then they are are served by the server and available to the VegaFusion pane
+    """
+    target.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(str(source), str(target), dirs_exist_ok=True)
 
 
 def get_plot(

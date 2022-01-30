@@ -10,15 +10,20 @@ from invoke import task
 
 @task(aliases=["js"])
 def javascript(command):
-    """Builds the panel-vegafusion Javascript package"""
+    """Builds the panel-vegafusion Javascript package and copies it to the python package"""
     print(
-        """Builds the panel-vegafusion Javascript package
+        """Builds the panel-vegafusion Javascript package and copies the assets to the python
+        package
 
 =================================================
 """
     )
     with command.cd("src-js"):
         command.run("npm run build", echo=True)
+
+    command.run(
+        " cp src-js/dist/* src/panel_vegafusion/assets/bundled/panel-vegafusion/", echo=True
+    )
 
 
 @task(aliases=["package"])

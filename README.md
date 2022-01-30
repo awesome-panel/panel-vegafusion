@@ -2,7 +2,7 @@
 
 # Panel VegaFusion
 
-WORK IN PROGRESS. PROOF OF CONCEPT WORKING. PACKAGE NOT WORKING!
+WORK IN PROGRESS. PROOF OF CONCEPT WORKING.
 
 The [Panel VegaFusion pane](https://github.com/marcskovmadsen/panel-vegafusion) allows you to create interactive **big data apps** based on the
 [Altair](https://altair-viz.github.io/index.html)
@@ -44,13 +44,16 @@ pn.state.template.param.update(
 )
 ```
 
+You can serve the application via `panel serve 'name_of_file.py` or
+`panel serve 'name_of_notebook.ipynb`.
+
 ## Todo
 
 This needs to be done before alpha release
 
 - [x] Fix all errors in `invoke test.all`
-- [] Make python package installable (and release it)
-- [] Implement way to get rid of the user having to serve the assets manually via
+- [x] Make python package installable (and release it)
+- [x] Implement way to get rid of the user having to serve the assets manually via
 `--static dist=./src-js/dist`.
 - [] Get things working on Binder
 
@@ -122,7 +125,7 @@ pytest test.all
 For now you can serve an example with hot reload via
 
 ```bash
-panel serve 'tests/apps/test_dev_app.py' --autoreload --show --static dist=./src-js/dist
+panel serve 'tests/apps/test_dev_app.py' --autoreload --show
 ```
 
 ![Panel VegaFusion Test App](https://raw.githubusercontent.com/MarcSkovMadsen/panel-vegafusion/main/assets/panel-vegafusion-dev-test.gif)

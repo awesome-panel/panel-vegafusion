@@ -1,0 +1,10 @@
+graft src/panel_vegafusion/dist
+include src/panel_vegafusion/assets/bundled/panel-vegafusion/*
+include src/panel_vegafusion/py.typed
+include src/panel_vegafusion/*.css
+include README.md
+include VERSION
+include LICENSE
+global-exclude *.ipynb_checkpoints/*
+global-exclude *.py[co]
+global-exclude *~

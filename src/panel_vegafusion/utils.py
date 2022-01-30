@@ -51,11 +51,8 @@ def get_theme():
 
 
 BUNDLE_SOURCE_PATH = pathlib.Path(__file__).parent / "assets" / "bundled" / "panel-vegafusion"
-print(BUNDLE_SOURCE_PATH)
 BUNDLE_TARGET_PATH = pathlib.Path(pn.__file__).parent / "dist" / "bundled" / "panel-vegafusion"
-print(BUNDLE_TARGET_PATH)
 BUNDLE_PANEL_URL_PREFIX = "static/extensions/panel/bundled/panel-vegafusion/"
-print(BUNDLE_PANEL_URL_PREFIX)
 
 
 def bundle(
@@ -63,7 +60,7 @@ def bundle(
     target: pathlib.Path = BUNDLE_TARGET_PATH,
 ):
     """Copies the panel-vegafusion bundled assets to the Panel bundled assets folder
-    
+
     Then they are are served by the server and available to the VegaFusion pane
     """
     target.mkdir(parents=True, exist_ok=True)

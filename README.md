@@ -1,4 +1,4 @@
-![Python Versions](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9-blue) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/MarcSkovMadsen/panel-vegafusion/HEAD?urlpath=lab) [![Follow on Twitter](https://img.shields.io/twitter/follow/MarcSkovMadsen.svg?style=social)](https://twitter.com/MarcSkovMadsen)
+![Python Versions](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9-blue) [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/MarcSkovMadsen/panel-vegafusion/HEAD?urlpath=lab) [![Follow on Twitter](https://img.shields.io/twitter/follow/MarcSkovMadsen.svg?style=social)](https://twitter.com/MarcSkovMadsen)
 
 # Panel VegaFusion
 
@@ -11,14 +11,15 @@ plotting library and the [Vega](https://vega.github.io/vega/) visualization spec
 It is all powered by [VegaFusion](https://github.com/vegafusion/vegafusion) which provides
 serverside acceleration for the Vega visualization grammar.
 
-## Example
+![Reference Example](assets/panel-vegafusion.gif)
+
+## Reference Example
 
 ```python
 import altair as alt
 import panel as pn
 from panel_vegafusion import VegaFusion
 from panel_vegafusion.utils import get_plot, ALTAIR_BLUE, get_theme
-
 
 pn.extension(template="fast")
 
@@ -40,12 +41,33 @@ pn.state.template.param.update(
 This Panel Vegafusion project is AGPLv3 Licensed because VegaFusion is AGPLv3 licensed and *requires the
 author to provide this application's source code upon request*.
 
-I don't yet understand the implications for using it in a "real" product.
+SO PLEASE INVESTIGATE THE LEGAL ASPECTS ON YOUR OWN. YOU WILL BE USING THIS PROJECT AT YOUR OWN RISK ANYWAYS!
 
-SO PLEASE INVESTIGATE THE LEGAL ASPECTS ON YOUR OWN. YOU WILL BE USING THIS REPO AT YOUR OWN
-RISK ANYWAYS!
+[![Legal Statement](assets/legal-statement.png)]((https://github.com/vegafusion/vegafusion/issues/62#issuecomment-1024403557))
 
-## Install
+## References
+
+- [VegaFusion](https://github.com/vegafusion/vegafusion)
+- [VegaFusion documentation](https://vegafusion.io/)
+- [Panel](https://panel.holoviz.org/)
+- [Panel Discourse](https://discourse.holoviz.org/)
+- [Awesome Panel](https://awesome-panel.org/)
+- [DataShader](https://datashader.org/) (A mature alternative for big data visualization)
+- [hvplot](https://hvplot.holoviz.org/)/ [HoloViews](https://holoviews.org/) (Provides alternative, easy to use crossfiltering using familar Pandas `.plot` api)
+
+## Issues Identified
+
+- [vegafusion/vegafusion #64 - Altair Dark theme not working](https://github.com/vegafusion/vegafusion/issues/64)
+- [Bokeh Discourse - Cannot bokeh build extension with wasm dependency](https://discourse.bokeh.org/t/how-do-i-build-bokeh-extension-with-wasm-depencency/8842)
+- [bokeh/ipywidgets_bokeh #46 - Not working with VegaFusionWidget](https://github.com/bokeh/ipywidgets_bokeh/issues/46)
+- [holoviz/param #597 - Add edit_readonly](https://github.com/holoviz/param/issues/597)
+- [holoviz/panel #3149 - Object of type Chart is not JSON serializable](https://github.com/holoviz/panel/issues/3149)
+- [vegafusion/vegafusion #62 - Please support Panel](https://github.com/vegafusion/vegafusion/issues/62)
+- [vegafusion/vegafusion #63 - Please provide simple .js build](https://github.com/vegafusion/vegafusion/issues/63)
+
+## Develop
+
+### Install
 
 ```bash
 git clone https://github.com/MarcSkovMadsen/panel-vegafusion.git
@@ -54,35 +76,7 @@ conda activate panel_vegafusion
 pip install -e .[all]
 ```
 
-## Develop
-
-For now you can serve an example with hot reload via
-
-```bash
-panel serve 'examples/reference.py' --autoreload --show --static dist=./src-js/dist
-```
-
-If working on the `.ts` code you might want to add autorebuild via
-
-```bash
-watchmedo shell-command --patterns="*.ts" --recursive --command='echo "${watch_src_path}" & panel build src/panel_vegafusion & echo "Update" >> src/panel_vegafusion/update.py' src/panel_vegafusion/models
-```
-
-You will have to do a [hard refresh](https://fabricdigital.co.nz/blog/how-to-hard-refresh-your-browser-and-clear-cache) of your browser to load the newly build `.js` files.
-
-You can find inspiration in the original Jupyter VegaFusion reference example via
-
-```bash
-jupyter lab tests/reference_example.ipynb
-```
-
-## Build
-
-Bokeh Extension
-
-```bash
-panel build src/panel_vegafusion
-```
+### Build
 
 panelVegaFusion js
 
@@ -92,24 +86,24 @@ npm run build
 cd ..
 ```
 
-## Test
+### Test
 
 ```bash
 pytest tests
 ```
 
-## CodeSandbox - panelVegaFusion
+### Serve Dev App
 
-[https://codesandbox.io/s/sleepy-carlos-2dqdt?file=/index.js](https://codesandbox.io/s/sleepy-carlos-2dqdt?file=/index.js)
+For now you can serve an example with hot reload via
 
-## References
+```bash
+panel serve 'tests/apps/test_dev_app.py' --autoreload --show --static dist=./src-js/dist
+```
 
-- [VegaFusion](https://github.com/vegafusion/vegafusion)
-- [Feature Request for Panel Support](https://github.com/vegafusion/vegafusion/issues/62)
+### Reference
 
-## Issues Identified
+You can also find inspiration in the original Jupyter VegaFusion reference example via
 
-- https://github.com/holoviz/panel/issues/3149
-- https://github.com/holoviz/param/issues/597
-- [Bokeh Discourse - Cannot bokeh build extension with wasm dependency](https://discourse.bokeh.org/t/how-do-i-build-bokeh-extension-with-wasm-depencency/8842)
-- [vegafusion/vegafusion #64 - Altair Dark theme not working](https://github.com/vegafusion/vegafusion/issues/64)
+```bash
+jupyter lab tests/reference_example.ipynb
+```

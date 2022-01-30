@@ -1,168 +1,94 @@
+"""The Panel VegaFusion pane allows you to create interactive big data apps based on 
+    the Altair plotting library and the Vega visualization specification.
+
+    It is all powered by [VegaFusion](https://github.com/vegafusion/vegafusion) which provides 
+    serverside acceleration for the Vega visualization grammar.
+"""
 import json
 import logging
 import time
 import altair as alt
 import param
+from typing import Optional, Union
 
-from ._utils import edit_constant
+from .utils import edit_constant
 import panel as pn
 from panel.reactive import ReactiveHTML
+import pathlib
 
 logger = logging.getLogger("panel-vegafusion")
 from vegafusion_jupyter.runtime import runtime
 
-VEGA_FUSION_CSS = """
-.vegafusion-loading {
-  color: red;
-  background: aqua;
-}
-.vegafusion-loading .inner {
-  width: 100px;
-}
-.vegafusion-embed {
-  min-height: 40px;
-  position: relative;
-  display: inline-block;
-  box-sizing: border-box;
-  overflow: visible;
-}
-.vegafusion-embed.has-actions {
-  padding-right: 38px;
-}
-.vegafusion-embed details:not([open]) > :not(summary) {
-  display: none !important;
-}
-.vegafusion-embed summary {
-  list-style: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 6px;
-  z-index: 1000;
-  background: white;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  color: #1b1e23;
-  border: 1px solid #aaa;
-  border-radius: 999px;
-  opacity: 0.2;
-  transition: opacity 0.4s ease-in;
-  outline: none;
-  cursor: pointer;
-  line-height: 0px;
-}
-.vegafusion-embed summary::-webkit-details-marker {
-  display: none;
-}
-.vegafusion-embed summary:active {
-  box-shadow: #aaa 0px 0px 0px 1px inset;
-}
-.vegafusion-embed summary svg {
-  width: 16px;
-  height: 16px;
-}
-.vegafusion-embed details[open] summary {
-  opacity: 0.5;
-}
-.vegafusion-embed:hover summary, .vegafusion-embed:focus summary {
-  opacity: 0.7 !important;
-  transition: opacity 0.2s ease;
-}
-.vegafusion-embed .vegafusion-actions {
-  position: absolute;
-  z-index: 1001;
-  top: 35px;
-  right: -9px;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 8px;
-  padding-top: 8px;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
-  border: 1px solid #d9d9d9;
-  background: white;
-  animation-duration: 0.15s;
-  animation-name: scale-in;
-  animation-timing-function: cubic-bezier(0.2, 0, 0.13, 1.5);
-  text-align: left;
-}
-.vegafusion-embed .vegafusion-actions hr {
-  width: auto;
-  height: 1px;
-  border: none;
-  background-color: #434a56;
-  margin: 4px 10px 4px 10px;
-  opacity: 50%;
-}
-.vegafusion-embed .vegafusion-actions .source-msg {
-  padding: 4px 16px;
-  font-family: sans-serif;
-  font-size: 10px;
-  font-weight: 400;
-  max-width: 180px;
-  color: #CD5C5C;
-}
-.vegafusion-embed .vegafusion-actions a {
-  padding: 4px 16px;
-  font-family: sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-  color: #434a56;
-  text-decoration: none;
-}
-.vegafusion-embed .vegafusion-actions a:hover {
-  background-color: #f7f7f9;
-  color: black;
-}
-.vegafusion-embed .vegafusion-actions::before, .vegafusion-embed .vegafusion-actions::after {
-  content: "";
-  display: inline-block;
-  position: absolute;
-  pointer-events: none;
-}
-.vegafusion-embed .vegafusion-actions::before {
-  left: auto;
-  right: 14px;
-  top: -16px;
-  border: 8px solid #0000;
-  border-bottom-color: #d9d9d9;
-}
-.vegafusion-embed .vegafusion-actions::after {
-  left: auto;
-  right: 15px;
-  top: -14px;
-  border: 7px solid #0000;
-  border-bottom-color: #fff;
-}
-.vegafusion-embed .chart-wrapper.fit-x {
-  width: 100%;
-}
-.vegafusion-embed .chart-wrapper.fit-y {
-  height: 100%;
-}
-
-.vegafusion-embed-wrapper {
-  max-width: 100%;
-  overflow: auto;
-  padding-right: 14px;
-}
-
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.6);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-"""
+VEGA_FUSION_CSS_PATH = pathlib.Path(__file__).parent/"vegafusion_pane.css"
+VEGA_FUSION_CSS = VEGA_FUSION_CSS_PATH.read_text()
 
 # Jupyter Python Widget: https://github.com/vegafusion/vegafusion/blob/main/python/vegafusion-jupyter/vegafusion_jupyter/widget.py
 # IPywidget Client Widget: https://github.com/vegafusion/vegafusion/blob/main/python/vegafusion-jupyter/src/widget.ts
 
 class VegaFusion(ReactiveHTML):
+    """The Panel VegaFusion pane allows you to create interactive big data apps based on 
+    the Altair plotting library and the Vega visualization specification.
+
+    It is all powered by [VegaFusion](https://github.com/vegafusion/vegafusion) which provides 
+    serverside acceleration for the Vega visualization grammar.
+
+    ## Example
+
+    ```python
+    import altair as alt
+    import panel as pn
+    from panel_vegafusion import VegaFusion
+    from panel_vegafusion.utils import ALTAIR_BLUE, get_theme
+    from vega_datasets import data
+
+    pn.extension(template="fast")
+
+    # Set the Theme
+
+    theme=get_theme()
+    alt.themes.enable(theme)
+
+    # Load the data
+        
+    key = "panel-vegafusion-chart"
+    if key in pn.state.cache:
+        seattle_weather = pn.state.cache[key]
+    else:
+        seattle_weather = pn.state.cache[key]=data.seattle_weather()
+
+    # Create the plot
+
+    brush = alt.selection(type='interval', encodings=['x'])
+
+    bars = alt.Chart().mark_bar().encode(
+        x='month(date):O',
+        y='mean(precipitation):Q',
+        opacity=alt.condition(brush, alt.OpacityValue(1), alt.OpacityValue(0.7)),
+    ).add_selection(
+        brush
+    )
+
+    line = alt.Chart().mark_rule(color='firebrick').encode(
+        y='mean(precipitation):Q',
+        size=alt.SizeValue(3)
+    ).transform_filter(
+        brush
+    )
+
+    plot = alt.layer(bars, line, data=seattle_weather).properties(height="container", width="container")
+
+    ## Wrap the plot in the VegaFusion pane
+
+    component = VegaFusion(plot, height=800).servable()
+
+    ## Configure the template
+
+    pn.state.template.param.update(
+        site="Panel meets VegaFusion", title="Interactive BIG DATA apps with CROSSFILTERING for Altair and Vega - PROOF OF CONCEPT",
+        accent_base_color=ALTAIR_BLUE, header_background=ALTAIR_BLUE,
+    )
+    ```
+"""
     object = param.ClassSelector(class_=(alt.TopLevelMixin, dict), allow_None=True, doc="""
         An altair chart or vega-lite dictionary""")
     spec = param.String(
@@ -183,7 +109,7 @@ class VegaFusion(ReactiveHTML):
     _request = param.List()
     _response = param.List()
 
-    _template = """
+    _template = f"<style>{VEGA_FUSION_CSS}</style>\n" + """
 <div id="containerElement" class="chart-wrapper" style="height:100%;width:100%;">
     <div id="viewElement" style="height:100%;width:100%;">Loading ...</div>
 </div>
@@ -314,7 +240,7 @@ if (event.target===svgElement && state.detailElement.open){
           
     }
 
-    def __init__(self, object, **params):
+    def __init__(self, object: Optional[Union[alt.TopLevelMixin, dict]]=None, **params):
         super().__init__(object=object, **params)
 
     _rename = {"object": None}
@@ -356,16 +282,6 @@ if (event.target===svgElement && state.detailElement.open){
             # logger.level = logging.INFO
             # logging.info(msg)
             print(msg)
-
-    @staticmethod
-    def enable():
-        import vegafusion_jupyter as vf
-
-        vf.enable()
-
-        if not VEGA_FUSION_CSS in pn.config.raw_css:
-            pn.config.raw_css.append(VEGA_FUSION_CSS)
-
 
     @param.depends("_request", watch=True)
     def _handle_request(self):

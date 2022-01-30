@@ -5,7 +5,7 @@ import altair as alt
 import param
 from panel.widgets.base import Widget
 
-from ._utils import edit_constant
+from .utils import edit_constant
 from .models import vegafusion_model
 
 logger = logging.getLogger("panel-vegafusion")

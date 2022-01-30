@@ -1,23 +1,49 @@
 ![Python Versions](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9-blue) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/MarcSkovMadsen/panel-vegafusion/HEAD?urlpath=lab) [![Follow on Twitter](https://img.shields.io/twitter/follow/MarcSkovMadsen.svg?style=social)](https://twitter.com/MarcSkovMadsen)
 
-# panel-vegafusion
+# Panel VegaFusion
 
-WORK IN PROGRESS. NOT WORKING
+PROOF OF CONCEPT CURRENTLY
 
-Provides a [VegaFusion](https://github.com/vegafusion/vegafusion) component (pane) for Panel to enable interactive big data apps using Vega or Altair.
+The [Panel VegaFusion pane](https://github.com/marcskovmadsen/panel-vegafusion) allows you to
+create interactive big data apps based on the [Altair](https://altair-viz.github.io/index.html)
+plotting library and the [Vega](https://vega.github.io/vega/) visualization specification.
+
+It is all powered by [VegaFusion](https://github.com/vegafusion/vegafusion) which provides
+serverside acceleration for the Vega visualization grammar.
+
+## Example
+
+```python
+import altair as alt
+import panel as pn
+from panel_vegafusion import VegaFusion
+from panel_vegafusion.utils import get_plot, ALTAIR_BLUE, get_theme
 
 
+pn.extension(template="fast")
 
-## License - IMPORTANT
+theme=get_theme()
+alt.themes.enable(theme)
 
-This reposity is MIT licensed. BUT the original VegaFusion is AGPLv3 licensed and *requires the
+plot=get_plot() # Can be replaced any Altair plot or Vega Specification
+
+component = VegaFusion(plot, height=800).servable()
+
+pn.state.template.param.update(
+    site="Panel meets VegaFusion", title="Interactive BIG DATA apps with CROSSFILTERING for Altair and Vega",
+    accent_base_color=ALTAIR_BLUE, header_background=ALTAIR_BLUE,
+)
+```
+
+## License - AGPLv3 - IMPORTANT
+
+This Panel Vegafusion project is AGPLv3 Licensed because VegaFusion is AGPLv3 licensed and *requires the
 author to provide this application's source code upon request*.
 
-I honestly believe there is no issue in creating a repository like this and exploring. But I
-don't yet understand the implications for using in a "real" product.
+I don't yet understand the implications for using it in a "real" product.
 
 SO PLEASE INVESTIGATE THE LEGAL ASPECTS ON YOUR OWN. YOU WILL BE USING THIS REPO AT YOUR OWN
-LEGAL RISK!
+RISK ANYWAYS!
 
 ## Install
 
@@ -33,7 +59,7 @@ pip install -e .[all]
 For now you can serve an example with hot reload via
 
 ```bash
-panel serve 'examples/basic.py' --autoreload --show
+panel serve 'examples/reference.py' --autoreload --show --static dist=./src-js/dist
 ```
 
 If working on the `.ts` code you might want to add autorebuild via

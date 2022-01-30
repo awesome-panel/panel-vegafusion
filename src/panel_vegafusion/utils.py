@@ -4,6 +4,11 @@ from typing import Optional
 import panel as pn
 import param
 
+ALTAIR_BLUE = "#1f77b4"
+ALTAIR_PALETTE = [
+    ALTAIR_BLUE, "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
+]
+
 
 # Needed because of https://github.com/holoviz/param/issues/597
 @contextmanager
@@ -27,14 +32,10 @@ def edit_constant(parameterized: param.Parameterized):
             p.constant = const
             p.readonly = readonly
 
-ALTAIR_PALETTE = [
-    "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
-]
-
 def get_theme():
     return pn.state.session_args.get("theme", [b'default'])[0].decode()
 
-def get_chart(theme: Optional[str]=None, height="container", width="container"):
+def get_plot(theme: Optional[str]=None, height="container", width="container"):
     import altair as alt
     from vega_datasets import data
 

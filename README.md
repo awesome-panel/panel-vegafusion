@@ -52,8 +52,18 @@ jupyter lab tests/reference_example.ipynb
 
 ## Build
 
+Bokeh Extension
+
 ```bash
 panel build src/panel_vegafusion
+```
+
+panelVegaFusion js
+
+```bash
+cd src-js
+npm run build
+cd ..
 ```
 
 ## Test

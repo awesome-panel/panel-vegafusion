@@ -130,3 +130,4 @@ dmypy.json
 _vegafusion_data
 src/panel_vegafusion/node_modules/*
 src/panel_vegafusion/node_modules
+src-js/node_modules

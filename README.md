@@ -117,7 +117,7 @@ invoke build.package
 ### Test
 
 ```bash
-pytest test.all
+invoke test.all
 ```
 
 ### Serve Dev App
@@ -135,7 +135,7 @@ panel serve 'tests/apps/test_dev_app.py' --autoreload --show
 For now you can serve an example with hot reload via
 
 ```bash
-panel serve 'examples/*.py' --autoreload --show --static dist=./src-js/dist
+panel serve 'examples/*.py' --autoreload --show
 ```
 
 ### Reference

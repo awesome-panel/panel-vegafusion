@@ -2,7 +2,7 @@
 
 # Panel VegaFusion
 
-PROOF OF CONCEPT CURRENTLY
+WORK IN PROGRESS. PROOF OF CONCEPT WORKING. PACKAGE NOT WORKING!
 
 The [Panel VegaFusion pane](https://github.com/marcskovmadsen/panel-vegafusion) allows you to
 create interactive big data apps based on the [Altair](https://altair-viz.github.io/index.html)
@@ -35,6 +35,16 @@ pn.state.template.param.update(
     accent_base_color=ALTAIR_BLUE, header_background=ALTAIR_BLUE,
 )
 ```
+
+## Todo
+
+This needs to be done before alpha release
+
+- [] Fix all errors in `invoke test.all`
+- [] Make python package installable (and release it)
+- [] Implement way to get rid of the user having to serve the assets manually via
+`--static dist=./src-js/dist`.
+- [] Get things working on Binder
 
 ## License - AGPLv3 - IMPORTANT
 
@@ -78,18 +88,22 @@ pip install -e .[all]
 
 ### Build
 
-panelVegaFusion js
+Javascript package
 
 ```bash
-cd src-js
-npm run build
-cd ..
+invoke build.js
+```
+
+Python package
+
+```bash
+invoke build.package
 ```
 
 ### Test
 
 ```bash
-pytest tests
+pytest test.all
 ```
 
 ### Serve Dev App
@@ -101,6 +115,23 @@ panel serve 'tests/apps/test_dev_app.py' --autoreload --show --static dist=./src
 ```
 
 ![Panel VegaFusion Test App](assets/panel-vegafusion-dev-test.gif)
+
+### Release Python Package
+
+Before releasing please make sures you have 
+
+- updated all version numbers
+- build all packages
+- run all tests with succes
+
+```bash
+python -m twine upload dist/*<VERSION>*
+```
+
+to deploy the package 📦.
+
+If you want to upload to *Test Pypi* first you can do so by adding `--repository testpypi`.
+
 
 ### Reference
 

@@ -5,17 +5,22 @@ import altair as alt
 import param
 from panel.widgets.base import Widget
 
-from .utils import edit_constant
 from .models import vegafusion_model
+from .utils import edit_constant
 
 logger = logging.getLogger("panel-vegafusion")
 
 # Jupyter Python Widget: https://github.com/vegafusion/vegafusion/blob/main/python/vegafusion-jupyter/vegafusion_jupyter/widget.py
 # IPywidget Client Widget: https://github.com/vegafusion/vegafusion/blob/main/python/vegafusion-jupyter/src/widget.ts
 
+
 class VegaFusion(Widget):
-    object = param.ClassSelector(class_=(alt.TopLevelMixin, dict), allow_None=True, doc="""
-        An altair chart or vega-lite dictionary""")
+    object = param.ClassSelector(
+        class_=(alt.TopLevelMixin, dict),
+        allow_None=True,
+        doc="""
+        An altair chart or vega-lite dictionary""",
+    )
     spec = param.String(
         doc="""The Vega json specification derived from the object""",
         allow_None=True,
@@ -35,7 +40,7 @@ class VegaFusion(Widget):
 
     # Set the Bokeh model to use
     _widget_type = vegafusion_model.VegaFusion
-    
+
     # Rename to bokeh model properties or skip
     _rename = {
         "title": None,
@@ -52,7 +57,9 @@ class VegaFusion(Widget):
                 data_transformer_opts = dict()
 
             with alt.renderers.enable("vegafusion"):
-                with alt.data_transformers.enable("vegafusion-feather", **data_transformer_opts):
+                with alt.data_transformers.enable(
+                    "vegafusion-feather", **data_transformer_opts
+                ):
                     # Temporarily enable the vegafusion renderer and transformer so
                     # that we use them even if they are not enabled globally
                     _spec = object.to_dict()
@@ -83,5 +90,3 @@ class VegaFusion(Widget):
         import vegafusion_jupyter as vf
 
         vf.enable()
-
-

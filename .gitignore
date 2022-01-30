@@ -132,3 +132,4 @@ src/panel_vegafusion/node_modules/*
 src/panel_vegafusion/node_modules
 scripts/node_modules
 src-js/node_modules
+src-js/dist copy

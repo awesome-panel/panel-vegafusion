@@ -1,5 +1,6 @@
-from bokeh.core.properties import Int, String, Bool, Float, Nullable, NumberSpec
+from bokeh.core.properties import Bool, Float, Int, Nullable, NumberSpec, String
 from bokeh.models import HTMLBox
+
 
 class VegaFusion(HTMLBox):
     """Example implementation of a Custom Bokeh Model"""

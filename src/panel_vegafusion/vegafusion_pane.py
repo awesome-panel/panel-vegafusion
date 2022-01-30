@@ -6,30 +6,31 @@
 """
 import json
 import logging
+import pathlib
 import time
-import altair as alt
-import param
 from typing import Optional, Union
 
-from .utils import edit_constant
-import panel as pn
+import altair as alt
+import param
 from panel.reactive import ReactiveHTML
-import pathlib
+
+from .utils import edit_constant
 
 logger = logging.getLogger("panel-vegafusion")
 from vegafusion_jupyter.runtime import runtime
 
-VEGA_FUSION_CSS_PATH = pathlib.Path(__file__).parent/"vegafusion_pane.css"
+VEGA_FUSION_CSS_PATH = pathlib.Path(__file__).parent / "vegafusion_pane.css"
 VEGA_FUSION_CSS = VEGA_FUSION_CSS_PATH.read_text()
 
 # Jupyter Python Widget: https://github.com/vegafusion/vegafusion/blob/main/python/vegafusion-jupyter/vegafusion_jupyter/widget.py
 # IPywidget Client Widget: https://github.com/vegafusion/vegafusion/blob/main/python/vegafusion-jupyter/src/widget.ts
 
+
 class VegaFusion(ReactiveHTML):
-    """The Panel VegaFusion pane allows you to create interactive big data apps based on 
+    """The Panel VegaFusion pane allows you to create interactive big data apps based on
     the Altair plotting library and the Vega visualization specification.
 
-    It is all powered by [VegaFusion](https://github.com/vegafusion/vegafusion) which provides 
+    It is all powered by [VegaFusion](https://github.com/vegafusion/vegafusion) which provides
     serverside acceleration for the Vega visualization grammar.
 
     ## Example
@@ -49,7 +50,7 @@ class VegaFusion(ReactiveHTML):
     alt.themes.enable(theme)
 
     # Load the data
-        
+
     key = "panel-vegafusion-chart"
     if key in pn.state.cache:
         seattle_weather = pn.state.cache[key]
@@ -87,16 +88,20 @@ class VegaFusion(ReactiveHTML):
         site="Panel VegaFusion", title="Interactive BIG DATA apps with CROSSFILTERING for Altair and Vega",
         accent_base_color=ALTAIR_BLUE, header_background=ALTAIR_BLUE,
     )
-    ```
-"""
-    object = param.ClassSelector(class_=(alt.TopLevelMixin, dict), allow_None=True, doc="""
-        An altair chart or vega-lite dictionary""")
+    ```"""
+
+    object = param.ClassSelector(
+        class_=(alt.TopLevelMixin, dict),
+        allow_None=True,
+        doc="""
+        An altair chart or vega-lite dictionary""",
+    )
     spec = param.String(
         doc="""The Vega json specification derived from the object""",
         allow_None=True,
         readonly=True,
     )
-    scale_factor = param.Number(1.0, bounds=(0,None))
+    scale_factor = param.Number(1.0, bounds=(0, None))
     verbose = param.Boolean(default=False, doc="""Whether to log or not""")
     indent = param.Integer(2, doc="""The indentation of json specifications""")
     debounce_wait = param.Number(30, allow_None=False)
@@ -109,7 +114,9 @@ class VegaFusion(ReactiveHTML):
     _request = param.List()
     _response = param.List()
 
-    _template = f"<style>{VEGA_FUSION_CSS}</style>\n" + """
+    _template = (
+        f"<style>{VEGA_FUSION_CSS}</style>\n"
+        + """
 <div id="containerElement" class="chart-wrapper" style="height:100%;width:100%;">
     <div id="viewElement" style="height:100%;width:100%;">Loading ...</div>
 </div>
@@ -133,11 +140,10 @@ class VegaFusion(ReactiveHTML):
     </details>
 </div>
 """
+    )
 
-    __javascript_modules__ = [
-        "dist/main.js"
-    ]
-    
+    __javascript_modules__ = ["dist/main.js"]
+
     _scripts = {
         "render": """
 console.log("render - start", new Date())
@@ -156,9 +162,9 @@ function render_core(panelVegaFusion){
 
 window.getPanelVegaFusion().then(object=>render_core(object))
 console.log("render - start", new Date())
-""", 
-    "after_layout": """setTimeout(function(){window.dispatchEvent(new Event('resize'))}, 25);""",
-    "value_changed": """
+""",
+        "after_layout": """setTimeout(function(){window.dispatchEvent(new Event('resize'))}, 25);""",
+        "value_changed": """
 console.log("value_changed - start", self)
 
 spec = data.spec;
@@ -204,43 +210,44 @@ if (spec !== null) {
 }
 
 console.log("value_changed - end")
-""", 
-    "spec": "self.value_changed()",
-    "verbose": "self.value_changed()",
-    "debounce_wait": "self.value_changed()",
-    "debounce_max_wait": "self.value_changed()",
-    "download_source_link": "self.value_changed()",
-    "_response": """
+""",
+        "spec": "self.value_changed()",
+        "verbose": "self.value_changed()",
+        "debounce_wait": "self.value_changed()",
+        "debounce_max_wait": "self.value_changed()",
+        "download_source_link": "self.value_changed()",
+        "_response": """
 bytes = data._response
 if (data.verbose) {
     console.log("VegaFusion received response: ", bytes)
 }
 state.vegafusion_handle.receive(bytes)
 """,
-    "exportToSVG": """
+        "exportToSVG": """
 event.preventDefault();
 if (state.vegafusion_handle) {
   state.vegafusion_handle.to_image_url("svg", data.scale_factor).then(object=>event.target.href=object);
   
 }   
 """,
-    "exportToPNG": """
+        "exportToPNG": """
 event.preventDefault();
 if (state.vegafusion_handle) {
   state.vegafusion_handle.to_image_url("png", data.scale_factor).then(object=>event.target.href=object);
 }   
 """,
-    "closeDetailElement": """
+        "closeDetailElement": """
 if (event.target===svgElement && state.detailElement.open){
   event.preventDefault()
   state.detailElement.removeAttribute('open');
 } else if (state.detailElement.contains(event.target) && state.detailElement.open) {
   state.detailElement.removeAttribute('open');
-}"""
-          
+}""",
     }
 
-    def __init__(self, object: Optional[Union[alt.TopLevelMixin, dict]]=None, **params):
+    def __init__(
+        self, object: Optional[Union[alt.TopLevelMixin, dict]] = None, **params
+    ):
         super().__init__(object=object, **params)
 
     _rename = {"object": None}
@@ -255,7 +262,9 @@ if (event.target===svgElement && state.detailElement.open){
                 data_transformer_opts = dict()
 
             with alt.renderers.enable("vegafusion"):
-                with alt.data_transformers.enable("vegafusion-feather", **data_transformer_opts):
+                with alt.data_transformers.enable(
+                    "vegafusion-feather", **data_transformer_opts
+                ):
                     # Temporarily enable the vegafusion renderer and transformer so
                     # that we use them even if they are not enabled globally
                     _spec = object.to_dict()
@@ -295,5 +304,13 @@ if (event.target===svgElement && state.detailElement.open){
         self._response = list(response_bytes)
 
         duration = (time.time() - start) * 1000
-        self._log(f"VegaFusion sent response_bytes in {duration:.1f}ms: {response_bytes}"[0:100] + "...")
-        self._log(f"VegaFusion sent response in {duration:.1f}ms: {self._response}"[0:100] + "...")
+        self._log(
+            f"VegaFusion sent response_bytes in {duration:.1f}ms: {response_bytes}"[
+                0:100
+            ]
+            + "..."
+        )
+        self._log(
+            f"VegaFusion sent response in {duration:.1f}ms: {self._response}"[0:100]
+            + "..."
+        )

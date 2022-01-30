@@ -11,7 +11,7 @@ plotting library and the [Vega](https://vega.github.io/vega/) visualization spec
 It is all powered by [VegaFusion](https://github.com/vegafusion/vegafusion) which provides
 serverside acceleration for the Vega visualization grammar.
 
-![Reference Example](https://github.com/marcskovmadsen/panel-vegafusion/assets/panel-vegafusion.gif)
+![Reference Example](https://raw.githubusercontent.com/MarcSkovMadsen/panel-vegafusion/main/assets/panel-vegafusion.gif)
 
 ## Install
 
@@ -59,7 +59,7 @@ author to provide this application's source code upon request*.
 
 SO PLEASE INVESTIGATE THE LEGAL ASPECTS ON YOUR OWN. YOU WILL BE USING THIS PROJECT AT YOUR OWN RISK ANYWAYS!
 
-[![Legal Statement](https://github.com/marcskovmadsen/panel-vegafusion/assets/legal-statement.png)]((https://github.com/vegafusion/vegafusion/issues/62#issuecomment-1024403557))
+[![Legal Statement](https://raw.githubusercontent.com/MarcSkovMadsen/panel-vegafusion/main/assets/legal-statement.png)]((https://github.com/vegafusion/vegafusion/issues/62#issuecomment-1024403557))
 
 ## References
 
@@ -124,7 +124,7 @@ For now you can serve an example with hot reload via
 panel serve 'tests/apps/test_dev_app.py' --autoreload --show --static dist=./src-js/dist
 ```
 
-![Panel VegaFusion Test App](https://github.com/marcskovmadsen/panel-vegafusion/assets/panel-vegafusion-dev-test.gif)
+![Panel VegaFusion Test App](https://raw.githubusercontent.com/MarcSkovMadsen/panel-vegafusion/main/assets/panel-vegafusion-dev-test.gif)
 
 ### Reference
 

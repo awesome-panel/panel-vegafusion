@@ -9,7 +9,5 @@ async function getPanelVegaFusion(){
   return panelVegaFusion
 }
 
-
-
 window.getPanelVegaFusion = getPanelVegaFusion
 export {};

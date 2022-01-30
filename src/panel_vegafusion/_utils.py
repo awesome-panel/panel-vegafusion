@@ -1,6 +1,9 @@
 from contextlib import contextmanager
+from typing import Optional
 
+import panel as pn
 import param
+
 
 # Needed because of https://github.com/holoviz/param/issues/597
 @contextmanager
@@ -24,11 +27,26 @@ def edit_constant(parameterized: param.Parameterized):
             p.constant = const
             p.readonly = readonly
 
-def get_chart():
-    import panel as pn
+ALTAIR_PALETTE = [
+    "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
+]
+
+def get_theme():
+    return pn.state.session_args.get("theme", [b'default'])[0].decode()
+
+def get_chart(theme: Optional[str]=None, height="container", width="container"):
     import altair as alt
     from vega_datasets import data
+
+    if not theme:
+        theme = get_theme()
+    if theme == "dark":
+        alt.themes.enable("dark")
+        print(theme)
+    else:
+        alt.themes.enable("default")
     
+        
     key = "panel-vegafusion-chart"
     if key in pn.state.cache:
         seattle_weather = pn.state.cache[key]
@@ -52,4 +70,7 @@ def get_chart():
         brush
     )
 
-    return alt.layer(bars, line, data=seattle_weather)
+    return alt.layer(bars, line, data=seattle_weather).properties(
+            height=height,
+            width=width,
+        )

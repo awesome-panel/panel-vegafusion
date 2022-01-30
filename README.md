@@ -85,21 +85,5 @@ pytest tests
 
 - https://github.com/holoviz/panel/issues/3149
 - https://github.com/holoviz/param/issues/597
-- https://discourse.bokeh.org/t/how-do-i-build-bokeh-extension-with-wasm-depencency/8842
-
-## Build vegafusion.js for web on Binder
-
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/MarcSkovMadsen/panel-vegafusion/HEAD?urlpath=lab)
-
-```bash
-curl https://sh.rustup.rs -sSf | sh
-source $HOME/.cargo/en
-rustup update
-curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-git clone https://github.com/vegafusion/vegafusion.git
-cd vegafusion
-cd vegafusion-wasm
-wasm-pack build --target web --dev # add --release if ready for it
-```
-
-You can find more information here cd vegafusion-rt-datafusion/tests/util/vegajs_runtime/
+- [Bokeh Discourse - Cannot bokeh build extension with wasm dependency](https://discourse.bokeh.org/t/how-do-i-build-bokeh-extension-with-wasm-depencency/8842)
+- [vegafusion/vegafusion #64 - Altair Dark theme not working](https://github.com/vegafusion/vegafusion/issues/64)

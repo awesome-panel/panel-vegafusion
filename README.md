@@ -44,8 +44,8 @@ pn.state.template.param.update(
 )
 ```
 
-You can serve the application via `panel serve 'name_of_file.py` or
-`panel serve 'name_of_notebook.ipynb`.
+You can serve the application via `panel serve name_of_file.py` or
+`panel serve name_of_notebook.ipynb`.
 
 ## Todo
 

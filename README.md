@@ -83,7 +83,7 @@ SO PLEASE INVESTIGATE THE LEGAL ASPECTS ON YOUR OWN. YOU WILL BE USING THIS PROJ
 
 ## Develop
 
-### Install
+### Install for development
 
 ```bash
 git clone https://github.com/MarcSkovMadsen/panel-vegafusion.git
@@ -126,9 +126,17 @@ panel serve 'tests/apps/test_dev_app.py' --autoreload --show --static dist=./src
 
 ![Panel VegaFusion Test App](https://github.com/marcskovmadsen/panel-vegafusion/assets/panel-vegafusion-dev-test.gif)
 
+### Reference
+
+You can also find inspiration in the original Jupyter VegaFusion reference example via
+
+```bash
+jupyter lab tests/reference_example.ipynb
+```
+
 ### Release Python Package
 
-Before releasing please make sures you have 
+Before releasing please make sures you have
 
 - updated all version numbers
 - build all packages
@@ -141,12 +149,3 @@ python -m twine upload dist/*<VERSION>*
 to deploy the package 📦.
 
 If you want to upload to *Test Pypi* first you can do so by adding `--repository testpypi`.
-
-
-### Reference
-
-You can also find inspiration in the original Jupyter VegaFusion reference example via
-
-```bash
-jupyter lab tests/reference_example.ipynb
-```

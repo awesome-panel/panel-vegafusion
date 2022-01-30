@@ -11,7 +11,7 @@ plotting library and the [Vega](https://vega.github.io/vega/) visualization spec
 It is all powered by [VegaFusion](https://github.com/vegafusion/vegafusion) which provides
 serverside acceleration for the Vega visualization grammar.
 
-![Reference Example](assets/panel-vegafusion.gif)
+![Reference Example](https://github.com/marcskovmadsen/panel-vegafusion/assets/panel-vegafusion.gif)
 
 ## Reference Example
 
@@ -53,7 +53,7 @@ author to provide this application's source code upon request*.
 
 SO PLEASE INVESTIGATE THE LEGAL ASPECTS ON YOUR OWN. YOU WILL BE USING THIS PROJECT AT YOUR OWN RISK ANYWAYS!
 
-[![Legal Statement](assets/legal-statement.png)]((https://github.com/vegafusion/vegafusion/issues/62#issuecomment-1024403557))
+[![Legal Statement](https://github.com/marcskovmadsen/panel-vegafusion/assets/legal-statement.png)]((https://github.com/vegafusion/vegafusion/issues/62#issuecomment-1024403557))
 
 ## References
 
@@ -84,6 +84,10 @@ git clone https://github.com/MarcSkovMadsen/panel-vegafusion.git
 conda create -n panel_vegafusion -c conda-forge python=3.9 nodejs
 conda activate panel_vegafusion
 pip install -e .[all]
+cd src-js
+npm install --save-dev webpack-cli
+npm install
+cd ..
 ```
 
 ### Build
@@ -114,7 +118,7 @@ For now you can serve an example with hot reload via
 panel serve 'tests/apps/test_dev_app.py' --autoreload --show --static dist=./src-js/dist
 ```
 
-![Panel VegaFusion Test App](assets/panel-vegafusion-dev-test.gif)
+![Panel VegaFusion Test App](https://github.com/marcskovmadsen/panel-vegafusion/assets/panel-vegafusion-dev-test.gif)
 
 ### Release Python Package
 

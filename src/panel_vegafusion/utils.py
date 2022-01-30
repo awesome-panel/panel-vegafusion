@@ -1,5 +1,6 @@
+"""Utilities for working with Panel, VegaFusion and Altair"""
 from contextlib import contextmanager
-from typing import Optional
+from typing import Optional, Union
 
 import panel as pn
 import param
@@ -29,32 +30,40 @@ def edit_constant(parameterized: param.Parameterized):
     params = parameterized.param.objects("existing").values()
     constants = [p.constant for p in params]
     readonlys = [p.readonly for p in params]
-    for p in params:
-        p.constant = False
-        p.readonly = False
+    for parameter in params:
+        parameter.constant = False
+        parameter.readonly = False
     try:
         yield
-    except:
+    except:  # pylint: disable=try-except-raise
         raise
     finally:
-        for (p, const, readonly) in zip(params, constants, readonlys):
-            p.constant = const
-            p.readonly = readonly
+        for (parameter, const, readonly) in zip(params, constants, readonlys):
+            parameter.constant = const
+            parameter.readonly = readonly
 
 
 def get_theme():
+    """Returns the relevant theme ('default' or 'dark') based on url parameters"""
     return pn.state.session_args.get("theme", [b"default"])[0].decode()
 
 
-def get_plot(theme: Optional[str] = None, height="container", width="container"):
+def get_plot(
+    theme: Optional[str] = None,
+    height: Union[int, str] = "container",
+    width: Union[int, str] = "container",
+):
+    """Returns an Altair Plot for demo and testing purposes"""
+    # pylint: disable=import-outside-toplevel
     import altair as alt
     from vega_datasets import data
+
+    # pylint: enable=import-outside-toplevel
 
     if not theme:
         theme = get_theme()
     if theme == "dark":
         alt.themes.enable("dark")
-        print(theme)
     else:
         alt.themes.enable("default")
 

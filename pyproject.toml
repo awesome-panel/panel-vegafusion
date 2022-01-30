@@ -1,0 +1,52 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint.design]
+max-attributes=12
+max-args=10
+
+[[tool.mypy.overrides]]
+module = "pandas.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "altair.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "panel.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "param.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "setuptools.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "invoke.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "bokeh.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "vega_datasets.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "vegafusion_jupyter.*"
+ignore_missing_imports = true

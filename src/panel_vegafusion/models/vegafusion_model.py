@@ -1,4 +1,7 @@
-from bokeh.core.properties import Bool, Float, Int, Nullable, NumberSpec, String
+# pylint: skip-file
+"""This file is not used or finished. We keep it until we decide the current ReactiveHTML 
+implementation is good enough."""
+from bokeh.core.properties import Bool, Float, Int, Nullable, String
 from bokeh.models import HTMLBox
 
 

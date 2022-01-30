@@ -10,9 +10,7 @@ from invoke import task
 
 @task(aliases=["js"])
 def javascript(command):
-    """Builds the panel-vegafusion Javascript package
-
-    """
+    """Builds the panel-vegafusion Javascript package"""
     print(
         """Builds the panel-vegafusion Javascript package
 
@@ -21,6 +19,7 @@ def javascript(command):
     )
     with command.cd("src-js"):
         command.run("npm run build", echo=True)
+
 
 @task(aliases=["package"])
 def python_package(command):

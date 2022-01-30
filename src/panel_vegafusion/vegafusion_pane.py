@@ -1,7 +1,7 @@
-"""The Panel VegaFusion pane allows you to create interactive big data apps based on 
+"""The Panel VegaFusion pane allows you to create interactive big data apps based on
     the Altair plotting library and the Vega visualization specification.
 
-    It is all powered by [VegaFusion](https://github.com/vegafusion/vegafusion) which provides 
+    It is all powered by [VegaFusion](https://github.com/vegafusion/vegafusion) which provides
     serverside acceleration for the Vega visualization grammar.
 """
 import json
@@ -13,19 +13,21 @@ from typing import Optional, Union
 import altair as alt
 import param
 from panel.reactive import ReactiveHTML
+from vegafusion_jupyter.runtime import runtime
 
 from .utils import edit_constant
 
 logger = logging.getLogger("panel-vegafusion")
-from vegafusion_jupyter.runtime import runtime
 
 VEGA_FUSION_CSS_PATH = pathlib.Path(__file__).parent / "vegafusion_pane.css"
 VEGA_FUSION_CSS = VEGA_FUSION_CSS_PATH.read_text()
 
+# pylint: disable=line-too-long
 # Jupyter Python Widget: https://github.com/vegafusion/vegafusion/blob/main/python/vegafusion-jupyter/vegafusion_jupyter/widget.py
 # IPywidget Client Widget: https://github.com/vegafusion/vegafusion/blob/main/python/vegafusion-jupyter/src/widget.ts
+# pylint: enable=line-too-long
 
-
+# pylint: disable=too-many-ancestors
 class VegaFusion(ReactiveHTML):
     """The Panel VegaFusion pane allows you to create interactive big data apps based on
     the Altair plotting library and the Vega visualization specification.
@@ -38,55 +40,24 @@ class VegaFusion(ReactiveHTML):
     ```python
     import altair as alt
     import panel as pn
+
     from panel_vegafusion import VegaFusion
-    from panel_vegafusion.utils import ALTAIR_BLUE, get_theme
-    from vega_datasets import data
+    from panel_vegafusion.utils import ALTAIR_BLUE, get_plot, get_theme
 
     pn.extension(template="fast")
 
-    # Set the Theme
-
-    theme=get_theme()
+    theme = get_theme()
     alt.themes.enable(theme)
 
-    # Load the data
-
-    key = "panel-vegafusion-chart"
-    if key in pn.state.cache:
-        seattle_weather = pn.state.cache[key]
-    else:
-        seattle_weather = pn.state.cache[key]=data.seattle_weather()
-
-    # Create the plot
-
-    brush = alt.selection(type='interval', encodings=['x'])
-
-    bars = alt.Chart().mark_bar().encode(
-        x='month(date):O',
-        y='mean(precipitation):Q',
-        opacity=alt.condition(brush, alt.OpacityValue(1), alt.OpacityValue(0.7)),
-    ).add_selection(
-        brush
-    )
-
-    line = alt.Chart().mark_rule(color='firebrick').encode(
-        y='mean(precipitation):Q',
-        size=alt.SizeValue(3)
-    ).transform_filter(
-        brush
-    )
-
-    plot = alt.layer(bars, line, data=seattle_weather).properties(height="container", width="container")
-
-    ## Wrap the plot in the VegaFusion pane
+    plot = get_plot()  # Can be replaced any Altair plot or Vega Specification
 
     component = VegaFusion(plot, height=800).servable()
 
-    ## Configure the template
-
     pn.state.template.param.update(
-        site="Panel VegaFusion", title="Interactive BIG DATA apps with CROSSFILTERING for Altair and Vega",
-        accent_base_color=ALTAIR_BLUE, header_background=ALTAIR_BLUE,
+        site="Panel VegaFusion",
+        title="Interactive BIG DATA apps with CROSSFILTERING using Altair or Vega",
+        accent_base_color=ALTAIR_BLUE,
+        header_background=ALTAIR_BLUE,
     )
     ```"""
 
@@ -114,6 +85,7 @@ class VegaFusion(ReactiveHTML):
     _request = param.List()
     _response = param.List()
 
+    # pylint: disable=line-too-long
     _template = (
         f"<style>{VEGA_FUSION_CSS}</style>\n"
         + """
@@ -141,6 +113,7 @@ class VegaFusion(ReactiveHTML):
 </div>
 """
     )
+    # pylint: enable=line-too-long
 
     __javascript_modules__ = ["dist/main.js"]
 
@@ -163,7 +136,7 @@ function render_core(panelVegaFusion){
 window.getPanelVegaFusion().then(object=>render_core(object))
 console.log("render - start", new Date())
 """,
-        "after_layout": """setTimeout(function(){window.dispatchEvent(new Event('resize'))}, 25);""",
+        "after_layout": "setTimeout(function(){window.dispatchEvent(new Event('resize'))}, 25);",
         "value_changed": """
 console.log("value_changed - start", self)
 
@@ -246,7 +219,10 @@ if (event.target===svgElement && state.detailElement.open){
     }
 
     def __init__(
-        self, object: Optional[Union[alt.TopLevelMixin, dict]] = None, **params
+        # pylint: disable=redefined-builtin
+        self,
+        object: Optional[Union[alt.TopLevelMixin, dict]] = None,
+        **params,
     ):
         super().__init__(object=object, **params)
 
@@ -254,17 +230,15 @@ if (event.target===svgElement && state.detailElement.open){
 
     @param.depends("object", watch=True, on_init=True)
     def _update_spec(self):
-        object = self.object
+        object = self.object  # pylint: disable=redefined-builtin
         if isinstance(object, alt.TopLevelMixin):
             if alt.data_transformers.active == "vegafusion-feather":
                 data_transformer_opts = alt.data_transformers.options
             else:
-                data_transformer_opts = dict()
+                data_transformer_opts = {}
 
             with alt.renderers.enable("vegafusion"):
-                with alt.data_transformers.enable(
-                    "vegafusion-feather", **data_transformer_opts
-                ):
+                with alt.data_transformers.enable("vegafusion-feather", **data_transformer_opts):
                     # Temporarily enable the vegafusion renderer and transformer so
                     # that we use them even if they are not enabled globally
                     _spec = object.to_dict()
@@ -305,12 +279,6 @@ if (event.target===svgElement && state.detailElement.open){
 
         duration = (time.time() - start) * 1000
         self._log(
-            f"VegaFusion sent response_bytes in {duration:.1f}ms: {response_bytes}"[
-                0:100
-            ]
-            + "..."
+            f"VegaFusion sent response_bytes in {duration:.1f}ms: {response_bytes}"[0:100] + "..."
         )
-        self._log(
-            f"VegaFusion sent response in {duration:.1f}ms: {self._response}"[0:100]
-            + "..."
-        )
+        self._log(f"VegaFusion sent response in {duration:.1f}ms: {self._response}"[0:100] + "...")

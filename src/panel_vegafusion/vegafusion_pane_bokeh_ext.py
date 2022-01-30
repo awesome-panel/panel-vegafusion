@@ -1,3 +1,6 @@
+# pylint: skip-file
+"""This file is not used or finished. We keep it until we decide the current ReactiveHTML 
+implementation is good enough."""
 import json
 import logging
 
@@ -57,9 +60,7 @@ class VegaFusion(Widget):
                 data_transformer_opts = dict()
 
             with alt.renderers.enable("vegafusion"):
-                with alt.data_transformers.enable(
-                    "vegafusion-feather", **data_transformer_opts
-                ):
+                with alt.data_transformers.enable("vegafusion-feather", **data_transformer_opts):
                     # Temporarily enable the vegafusion renderer and transformer so
                     # that we use them even if they are not enabled globally
                     _spec = object.to_dict()

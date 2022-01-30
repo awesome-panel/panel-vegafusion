@@ -73,13 +73,16 @@ SO PLEASE INVESTIGATE THE LEGAL ASPECTS ON YOUR OWN. YOU WILL BE USING THIS PROJ
 
 ## Issues Identified
 
-- [vegafusion/vegafusion #64 - Altair Dark theme not working](https://github.com/vegafusion/vegafusion/issues/64)
+- [vegafusion/vegafusion #64 - Support Vega-Embed Themes](https://github.com/vegafusion/vegafusion/issues/64)
 - [Bokeh Discourse - Cannot bokeh build extension with wasm dependency](https://discourse.bokeh.org/t/how-do-i-build-bokeh-extension-with-wasm-depencency/8842)
 - [bokeh/ipywidgets_bokeh #46 - Not working with VegaFusionWidget](https://github.com/bokeh/ipywidgets_bokeh/issues/46)
 - [holoviz/param #597 - Add edit_readonly](https://github.com/holoviz/param/issues/597)
 - [holoviz/panel #3149 - Object of type Chart is not JSON serializable](https://github.com/holoviz/panel/issues/3149)
 - [vegafusion/vegafusion #62 - Please support Panel](https://github.com/vegafusion/vegafusion/issues/62)
 - [vegafusion/vegafusion #63 - Please provide simple .js build](https://github.com/vegafusion/vegafusion/issues/63)
+- [vegafusion/vegafusion #68 - Provide VegaFusionRunTime from the vegafusion package](https://github.com/vegafusion/vegafusion/issues/68)
+- [vegafusion/vegafusion #66 - Please support events](https://github.com/vegafusion/vegafusion/issues/66)
+- [vegafusion/vegafusion #67 - Uncaught (in promise) out of memory](https://github.com/vegafusion/vegafusion/issues/67)
 
 ## Develop
 

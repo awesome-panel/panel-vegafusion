@@ -3,14 +3,13 @@ from panel_vegafusion.utils import get_plot, ALTAIR_BLUE
 from panel_vegafusion import VegaFusion
 
 def test_dev_app():
-    pn.extension("ace", template="fast")
+    pn.extension(template="fast")
 
     accent = ALTAIR_BLUE
 
-    VegaFusion.enable()
-    chart = get_plot()()
+    chart = get_plot()
 
-    component = VegaFusion(chart, verbose=False, height=800).servable(area="main")
+    component = VegaFusion(chart, verbose=True, height=800).servable(area="main")
     pn.Param(component, parameters=["verbose", "debounce_wait", "debounce_max_wait"], name="VegaFusion Settings").servable(area="sidebar")
     pn.Accordion(
         component.param.spec,
@@ -22,7 +21,7 @@ def test_dev_app():
     ).servable(area="sidebar")
 
     pn.state.template.param.update(
-        site="Panel meets VegaFusion", title="Interactive BIG DATA apps with CROSSFILTERING for Altair and Vega - PROOF OF CONCEPT",
+        site="Panel VegaFusion", title="Interactive BIG DATA apps with CROSSFILTERING for Altair and Vega",
         accent_base_color=accent, header_background=accent,
     )
 

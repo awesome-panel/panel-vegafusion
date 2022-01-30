@@ -25,7 +25,7 @@ plot=get_plot() # Can be replaced any Altair plot or Vega Specification
 component = VegaFusion(plot, height=800).servable()
 
 pn.state.template.param.update(
-    site="Panel meets VegaFusion", title="Interactive BIG DATA apps with CROSSFILTERING for Altair and Vega",
+    site="Panel VegaFusion", title="Interactive BIG DATA apps with CROSSFILTERING for Altair and Vega",
     accent_base_color=ALTAIR_BLUE, header_background=ALTAIR_BLUE,
 )
 ```

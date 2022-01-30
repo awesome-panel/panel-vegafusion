@@ -84,7 +84,7 @@ class VegaFusion(ReactiveHTML):
     ## Configure the template
 
     pn.state.template.param.update(
-        site="Panel meets VegaFusion", title="Interactive BIG DATA apps with CROSSFILTERING for Altair and Vega - PROOF OF CONCEPT",
+        site="Panel VegaFusion", title="Interactive BIG DATA apps with CROSSFILTERING for Altair and Vega",
         accent_base_color=ALTAIR_BLUE, header_background=ALTAIR_BLUE,
     )
     ```

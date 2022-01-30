@@ -13,6 +13,12 @@ serverside acceleration for the Vega visualization grammar.
 
 ![Reference Example](https://github.com/marcskovmadsen/panel-vegafusion/assets/panel-vegafusion.gif)
 
+## Install
+
+```bash
+pip install panel-vegafusion
+```
+
 ## Reference Example
 
 ```python

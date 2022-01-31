@@ -1,0 +1,13 @@
+# environment.yml
+channels:
+- conda-forge
+dependencies:
+- python =3.8
+- pip
+- code-server
+- nodejs
+- pip:
+  - jupyter-panel-proxy # Adds Panel icon to Jupyter lab launchpad, to launch Panel app(s)
+  - jupyter-vscode-proxy # Needed for VS Code in Jupyter Lab
+  - jupyter_bokeh # needed for VS Code
+  - ipykernel # needed to be able to change between kernels in VS Code

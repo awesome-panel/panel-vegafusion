@@ -13,8 +13,9 @@ from typing import Optional, Union
 import altair as alt
 import param
 from panel.reactive import ReactiveHTML
-from vegafusion_jupyter.runtime import runtime
 
+from . import renderer, transformer
+from .runtime import runtime
 from .utils import BUNDLE_PANEL_URL_PREFIX, bundle, edit_constant
 
 logger = logging.getLogger("panel-vegafusion")
@@ -23,6 +24,8 @@ VEGA_FUSION_CSS_PATH = pathlib.Path(__file__).parent / "vegafusion_pane.css"
 VEGA_FUSION_CSS = VEGA_FUSION_CSS_PATH.read_text()
 
 bundle()
+renderer.register()
+transformer.register()
 
 # pylint: disable=line-too-long
 # Jupyter Python Widget: https://github.com/vegafusion/vegafusion/blob/main/python/vegafusion-jupyter/vegafusion_jupyter/widget.py
@@ -234,13 +237,13 @@ if (event.target===svgElement && state.detailElement.open){
     def _update_spec(self):
         object = self.object  # pylint: disable=redefined-builtin
         if isinstance(object, alt.TopLevelMixin):
-            if alt.data_transformers.active == "vegafusion-feather":
+            if alt.data_transformers.active == transformer.NAME:
                 data_transformer_opts = alt.data_transformers.options
             else:
                 data_transformer_opts = {}
 
-            with alt.renderers.enable("vegafusion"):
-                with alt.data_transformers.enable("vegafusion-feather", **data_transformer_opts):
+            with alt.renderers.enable(renderer.NAME):
+                with alt.data_transformers.enable(transformer.NAME, **data_transformer_opts):
                     # Temporarily enable the vegafusion renderer and transformer so
                     # that we use them even if they are not enabled globally
                     _spec = object.to_dict()
@@ -253,7 +256,7 @@ if (event.target===svgElement && state.detailElement.open){
             else:
                 self.spec = None
 
-        if alt.renderers.active == "vegafusion":
+        if alt.renderers.active == renderer.NAME:
             # Use configured debounce options, if any
             renderer_opts = alt.renderers.options
             if "debounce_wait" in renderer_opts:

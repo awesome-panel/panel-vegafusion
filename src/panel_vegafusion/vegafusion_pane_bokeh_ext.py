@@ -85,9 +85,3 @@ class VegaFusion(Widget):
     def _log(self, msg):
         if self.verbose:
             logger.info("panel.VegaFusion: %", msg)
-
-    @staticmethod
-    def enable():
-        import vegafusion_jupyter as vf
-
-        vf.enable()

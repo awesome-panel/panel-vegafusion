@@ -48,5 +48,5 @@ module = "vega_datasets.*"
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
-module = "vegafusion_jupyter.*"
+module = "vegafusion.*"
 ignore_missing_imports = true

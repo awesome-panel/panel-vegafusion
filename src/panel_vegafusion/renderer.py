@@ -27,13 +27,12 @@ def vegafusion_renderer(spec, **widget_options):
     """
     Altair renderer that displays charts using the Panel VegaFusion pane
     """
-    from IPython.display import display # type: ignore
+    from IPython.display import display  # type: ignore
 
     from panel_vegafusion import VegaFusion
 
     # Display widget as a side effect, then return empty string text representation
     # so that Altair doesn't also display a string representation
-
     # Not tested yet. Don't know if it will work
     widget = VegaFusion(spec, **widget_options)
     display(widget)

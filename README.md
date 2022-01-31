@@ -55,16 +55,6 @@ You can serve the application via `panel serve name_of_file.py` or
 `panel serve name_of_notebook.ipynb`. Add the `--autoreload` for *hot reload* during development
 and `--show` to automatically open the app in the browser.
 
-## Todo
-
-This needs to be done before alpha release
-
-- [x] Fix all errors in `invoke test.all`
-- [x] Make python package installable (and release it)
-- [x] Implement way to get rid of the user having to serve the assets manually via
-`--static dist=./src-js/dist`.
-- [] Get things working on Binder
-
 ## License - AGPLv3 - IMPORTANT
 
 This Panel Vegafusion project is AGPLv3 Licensed because VegaFusion is AGPLv3 licensed and *requires the

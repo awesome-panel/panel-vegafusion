@@ -84,6 +84,9 @@ SO PLEASE INVESTIGATE THE LEGAL ASPECTS ON YOUR OWN. YOU WILL BE USING THIS PROJ
 - [vegafusion/vegafusion #68 - Provide VegaFusionRunTime from the vegafusion package](https://github.com/vegafusion/vegafusion/issues/68)
 - [vegafusion/vegafusion #66 - Please support events](https://github.com/vegafusion/vegafusion/issues/66)
 - [vegafusion/vegafusion #67 - Uncaught (in promise) out of memory](https://github.com/vegafusion/vegafusion/issues/67)
+- [vegafusion/vegafusion #69 - Document how VegaFusion solves real problems](https://github.com/vegafusion/vegafusion/issues/69)
+- [vegafusion/vegafusion #70 - Move feather transformer to 'vegafusion' package](https://github.com/vegafusion/vegafusion/issues/70)
+- [vegafusion/vegafusion #67 - Support multiple 'vegafusion' renderers](https://github.com/vegafusion/vegafusion/issues/71)
 
 ## Develop
 

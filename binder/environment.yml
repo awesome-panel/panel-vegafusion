@@ -12,4 +12,4 @@ dependencies:
   - jupyter_bokeh # needed for VS Code
   - ipykernel # needed to be able to change between kernels in VS Code
 variables:
-  BOKEH_ALLOW_WS_ORIGIN: *
+  BOKEH_ALLOW_WS_ORIGIN: '*'

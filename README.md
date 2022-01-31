@@ -21,6 +21,13 @@ Vega visualization grammar.
 pip install panel-vegafusion
 ```
 
+If you have Jupyter Lab installed and plan on using it you should definately also install the
+[Panel Jupyterlab Preview](https://blog.holoviz.org/panel_0.12.0.html#JupyterLab-previews) via
+
+```bash
+jupyter serverextension enable panel.io.jupyter_server_extension
+```
+
 ## Example
 
 ```python
@@ -45,7 +52,8 @@ pn.state.template.param.update(
 ```
 
 You can serve the application via `panel serve name_of_file.py` or
-`panel serve name_of_notebook.ipynb`.
+`panel serve name_of_notebook.ipynb`. Add the `--autoreload` for *hot reload* during development
+and `--show` to automatically open the app in the browser.
 
 ## Todo
 
@@ -98,7 +106,6 @@ conda create -n panel_vegafusion -c conda-forge python=3.9 nodejs
 conda activate panel_vegafusion
 pip install -e .[all]
 cd src-js
-npm install --save-dev webpack-cli
 npm install
 cd ..
 ```

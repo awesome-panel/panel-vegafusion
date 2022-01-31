@@ -18,11 +18,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import datetime
 import io
 import os
 import pathlib
-import time
 from hashlib import sha1
 from tempfile import NamedTemporaryFile
 
@@ -30,6 +28,7 @@ import altair as alt
 import pandas as pd
 
 NAME = "panel-vegafusion-feather"
+
 
 def to_feather(data, file):
     """
@@ -111,6 +110,7 @@ def feather_transformer(data, data_dir="_vegafusion_data"):
             os.replace(tmp_name, path)
 
         return {"url": path.as_posix()}
+
 
 def register():
     """Registers the 'panel-vega-feather' transformer for Altair"""

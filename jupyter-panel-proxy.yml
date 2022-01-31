@@ -1,3 +1,5 @@
 # See https://github.com/holoviz/jupyter-panel-proxy
-apps: examples/* tests/apps/*
+apps: 
+  - examples/reference.py
+  - tests/apps/test_dev_app.py
 autoreload: true

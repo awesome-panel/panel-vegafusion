@@ -55,6 +55,13 @@ You can serve the application via `panel serve name_of_file.py` or
 `panel serve name_of_notebook.ipynb`. Add the `--autoreload` for *hot reload* during development
 and `--show` to automatically open the app in the browser.
 
+## Gallery
+
+| Guide | Notebook | Jupyter Notebook | Jupyter Labs | Panel App |
+| - | - | - | - | - |
+| reference | [View](https://github.com/MarcSkovMadsen/panel-vegafusion/blob/main/examples/reference.py) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/marcskovmadsen/panel-vegafusion/HEAD?filepath=examples/reference.py) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/marcskovmadsen/panel-vegafusion/HEAD?urlpath=lab/tree/examples/reference.py) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/marcskovmadsen/panel-vegafusion/HEAD?urlpath=panel/reference) |
+| dev_app | [View](https://github.com/MarcSkovMadsen/panel-vegafusion/blob/main/examples/dev_app.py) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/marcskovmadsen/panel-vegafusion/HEAD?filepath=examples/dev_app.py) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/marcskovmadsen/panel-vegafusion/HEAD?urlpath=lab/tree/examples/dev_app.py) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/marcskovmadsen/panel-vegafusion/HEAD?urlpath=panel/dev_app) |
+
 ## License - AGPLv3 - IMPORTANT
 
 This Panel Vegafusion project is AGPLv3 Licensed because VegaFusion is AGPLv3 licensed and *requires the
@@ -125,7 +132,7 @@ invoke test.all
 For now you can serve an example with hot reload via
 
 ```bash
-panel serve 'tests/apps/test_dev_app.py' --autoreload --show
+panel serve 'examples/dev_app.py' --autoreload --show
 ```
 
 ![Panel VegaFusion Test App](https://raw.githubusercontent.com/MarcSkovMadsen/panel-vegafusion/main/assets/panel-vegafusion-dev-test.gif)

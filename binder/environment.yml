@@ -12,5 +12,6 @@ dependencies:
   - jupyter-vscode-proxy # Needed for VS Code in Jupyter Lab
   - jupyter_bokeh # needed for VS Code
   - ipykernel # needed to be able to change between kernels in VS Code
+  - hvplot
 variables:
   BOKEH_ALLOW_WS_ORIGIN: '*'
